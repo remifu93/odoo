@@ -17,8 +17,8 @@ class OrderProductAdmin(admin.ModelAdmin):
 @admin.register(OrderLine)
 class OrderLineAdmin(admin.ModelAdmin):
     list_display = ('order', 'orderProduct', 'quantity', 'unitPrice')
-    list_filter = ('orderProduct',)
-    search_fields = ('orderProduct__name',)
+    list_filter = ('order',)
+    search_fields = ('order', 'orderProduct__name',)
 
 
 @admin.register(Order)

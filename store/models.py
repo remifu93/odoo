@@ -42,7 +42,7 @@ class Order(models.Model):
     status = models.CharField(max_length=255, choices=STATUS_CHOICES, default='PRESUPUESTO')
 
     def __str__(self):
-        return f"Pedido - {self.id}"
+        return f"Pedido {self.id}"
 
 
 class OrderLine(models.Model):
