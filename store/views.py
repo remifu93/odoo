@@ -17,12 +17,12 @@ class OrderViewSet(viewsets.ModelViewSet):
 
         # Obtengo los datos del pedido ya validados previamente
         order_data = serializer.validated_data
-
-        # Crea o actualiza el cliente si no se desea actualizar los datos podria utilizar create en lugar de update_or_create
         customer_data = order_data['customer']
-        customer, _ = Customer.objects.update_or_create(
+
+        # Registra el cliente si no lo tengo, si existe lo devuelve
+        customer, created = Customer.objects.get_or_create(
             companyName=customer_data['companyName'],
-            defaults=customer_data
+            defaults=order_data['customer']
         )
 
         # Crea el pedido
@@ -35,11 +35,13 @@ class OrderViewSet(viewsets.ModelViewSet):
         for order_line_data in order_data['orderLines']:
             order_product_data = order_line_data['orderProduct']
 
-            order_product, _ = OrderProduct.objects.update_or_create(
+            # busco el producto, si no lo tengo lo agrego
+            order_product, created = OrderProduct.objects.get_or_create(
                 sku=order_product_data['sku'],
                 defaults=order_product_data
             )
 
+            # registro la linea del pedido en db
             OrderLine.objects.create(
                 order=order,
                 orderProduct=order_product,
@@ -48,5 +50,3 @@ class OrderViewSet(viewsets.ModelViewSet):
             ).save()
 
         return Response(OrderSerializer(order).data, status=201)
-
-
