@@ -34,3 +34,7 @@ $ python3 manage.py test
 ```
 
 El codigo se encuentran en **store/tests.py**
+
+## Modulo CSV
+Para ingresar al modulo csv ir a la url:
+http://127.0.0.1:8000/csv/upload/
