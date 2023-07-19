@@ -24,27 +24,29 @@ def get_csv_order_values(csv_file, order_column_name):
 
 def upload_csv(request):
     """
-        Vista DJANGO para Suvir CSV y ver estados de Ordenes.
+        Vista Django para Subir CSV y ver estados de Órdenes.
 
-        Esta vista se podria abstraer y hacer con mucho menos codigo utilizando class based views y los modelos django.
-        Pero entiendo que el objetivo es comprobar mi nivel de compresion general tanto en python como en SQL.
+        Esta vista se podría abstraer y hacer con mucho menos código utilizando Class-Based Views y los modelos de Django.
+        Pero entiendo que el objetivo es comprobar mi nivel de compresión general, tanto en Python como en SQL.
 
-        Por lo que entendi, el modulo web deberia ser capaz de recibir un fichero csv, leer su contenido el cual en una columna traeria
-        los "nombres de orders", en este caso utilice ORDER ID para identificar una orden.
+        Por lo que entendí, el módulo web debería ser capaz de recibir un archivo CSV, leer su contenido, el cual en una
+        columna traería los "nombres de órdenes", en este caso utilicé "ORDER ID" para identificar una orden.
 
-        Por lo tanto al momento de crear ordenes se le auto asigna el campo ID que es auto increment, podria implementarse a estos modulos,
-        que dicho ORDEN ID llegue en el JSON al momento de registrar la orden.
+        Por lo tanto, al momento de crear órdenes, se le autoasigna el campo ID, que es autoincremental.
+        Podría implementarse a estos módulos que dicho ORDER ID llegue en el JSON al momento de registrar la orden.
 
-        El usuario debe proporsionar un CSV y el nombre de columna que contiene el ORDER ID de las filas
+        El usuario debe proporcionar un CSV y el nombre de columna que contiene el ORDER ID de las filas.
 
-        CSV ejemplo, en el modulo web se carga el fichero con este formato y se indicaria order en columna, ademas de los estados que se quieren ver
+        Ejemplo de CSV: en el módulo web se carga el fichero con este formato y se indicaría "order" en la columna,
+        además de los estados que se quieren ver.
 
         amount,customer,city,order
         5000,2023-01-01,Empresa 1,1
         1000,2023-01-01,Empresa 2,2
         1500,2023-01-01,Empresa 3,3
 
-        Este modulo devuelve las ordenes con el estado indicado
+        Este módulo devuelve las órdenes con el estado indicado.
+
     """
     if request.method == 'POST':
         form = UploadCSVForm(request.POST, request.FILES)
