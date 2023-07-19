@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Datos del CSV{% endblock %}
+
+{% block content %}
+    <h3 class="mt-3">Datos de Ordenes</h3>
+    {% if orders %}
+        <table class="table table-striped">
+        <thead>
+            <tr>
+              <th scope="col">ORDER ID</th>
+              <th scope="col">Customer</th>
+              <th scope="col">Status</th>
+            </tr>
+      </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                  <td>{{ order.id }}</td>
+                    <td>{{ order.customer }}</td>
+                    <td>{{ order.status }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No hay nada para mostrar aqui...</p>
+    {% endif %}
+
+
+{% endblock %}

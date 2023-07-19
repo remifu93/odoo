@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Cargar CSV{% endblock %}
+
+{% block content %}
+    <h3 class="mb-3">Verificar estado de Ordenes</h3>
+    <p>Carga un fichero csv para consultar en base de datos y ver su estado segun el filtro indicado</p>
+
+    <form class="mt-5" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-primary" type="submit" value="Cargar fichero">
+    </form>
+{% endblock %}
